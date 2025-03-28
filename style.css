@@ -1,0 +1,111 @@
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+}
+
+header {
+    background-color: #4A90E2; /* Azul */
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+header h1 {
+    font-size: 3rem;
+    color: white;
+    margin: 0;
+}
+
+/* Main title */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #4A90E2; /* Azul */
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-top: 40px;
+    color: #B0B0B0;
+}
+
+/* Form styles */
+label {
+    font-size: 1.2rem;
+    color: #B0B0B0;
+    margin-right: 10px;
+}
+
+select, input[type="number"] {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #333;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 5px;
+    width: 200px;
+}
+
+button {
+    background-color: #4A90E2; /* Azul */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+button:hover {
+    background-color: #357ABD; /* Azul oscuro */
+}
+
+/* List styles */
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+li {
+    font-size: 1.1rem;
+    margin: 8px 0;
+    background-color: #1F1F1F;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    
+    label, select, input[type="number"], button {
+        font-size: 1rem;
+        width: 80
+        
+    }
+/* Campo de texto para el concepto */
+input[type="text"] {
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #333;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 5px;
+    width: 200px;
+
+}
+
+}
