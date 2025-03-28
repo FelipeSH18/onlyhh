@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Movimientos</title>
+    <link rel="stylesheet" href="style.css">  <!-- Vincula tu archivo CSS aquí -->
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Onlyhatters</h1>
+    </header>
+
+    <h1>Total en la cuenta: <span id="total">0</span></h1>
+    
+    <label>Socio:</label>
+    <select id="socio">
+        <option>Andy</option>
+        <option>Edgar</option>
+        <option>Emiliano</option>
+        <option>Felipe</option>
+    </select>
+
+    <label>Cantidad:</label>
+    <input type="number" id="cantidad">
+
+    <label>Tipo:</label>
+    <select id="tipo">
+        <option value="ingreso">Ingreso</option>
+        <option value="gasto">Gasto</option>
+    </select>
+
+    <label>Concepto:</label>
+    <input type="text" id="concepto" placeholder="Descripción del movimiento">
+
+    <button onclick="registrarMovimiento()">Registrar</button>
+
+    <h2>Historial</h2>
+    <ul id="historial"></ul>
+
+    <script>
+        function cargarMovimientos() {
+            fetch('/.netlify/functions/movimientos')
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("total").textContent = data.total;
+                    let historialHTML = "";
+                    data.movimientos.forEach(m => {
+                        historialHTML += <li>${m.fecha.split("T")[0]} - ${m.socio}: ${m.tipo === 'ingreso' ? '+' : '-'}$${m.cantidad} - ${m.concepto}</li>;
+                    });
+                    document.getElementById("historial").innerHTML = historialHTML;
+                });
+        }
+
+        function registrarMovimiento() {
+            const socio = document.getElementById("socio").value;
+            const cantidad = parseFloat(document.getElementById("cantidad").value);
+            const tipo = document.getElementById("tipo").value;
+            const concepto = document.getElementById("concepto").value.trim();
+
+            if (!concepto) {
+                alert("Por favor, ingresa un concepto para el movimiento.");
+                return;
+            }
+
+            fetch('/.netlify/functions/movimientos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ socio, cantidad, tipo, concepto })
+            })
+            .then(res => res.json())
+            .then(() => {
+                cargarMovimientos();
+                document.getElementById("cantidad").value = "";
+                document.getElementById("concepto").value = "";
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", cargarMovimientos);
+    </script>
+</body>
+</html>
